@@ -12,7 +12,7 @@ struct ContentView: View {
     @State var isPlaying : Bool = false
     @State var displayTime : String = "00:00:00"
     init(seconds: TimeInterval = 0 ) {
-        self.timerViewModel = TimerViewModel(seconds: seconds, goalTime: 20)
+        self.timerViewModel = TimerViewModel(seconds: seconds, goalTime: 60)
     }
     var body: some View {
         VStack {
@@ -78,10 +78,11 @@ struct ContentView: View {
     private var progressCircle : some View {
        
             Circle()
-            .trim(from: 0,to: timerViewModel.progress/timerViewModel.goalTime)
+            .trim(from: 0,to: timerViewModel.progress)
             .stroke(Color.red, style: StrokeStyle(lineWidth: 10,lineCap: .butt,dash: [2,6]))
             .rotationEffect(Angle(degrees: -90))
             .animation(.spring, value: timerViewModel.progress)
+            .frame(width: 300,height: 400)
             
         
        
